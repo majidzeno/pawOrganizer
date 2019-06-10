@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: CR;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@font-face {
+  font-family: CR;
+  src: url("./Assets/Cairo/Cairo-Regular.ttf");
+}
+
+@font-face {
+  font-family: CB;
+  src: url("./Assets/Cairo/Cairo-Bold.ttf");
+}
+
+@font-face {
+  font-family: CS;
+  src: url("./Assets/Cairo/Cairo-SemiBold.ttf");
 }

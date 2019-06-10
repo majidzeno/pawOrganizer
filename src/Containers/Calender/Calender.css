@@ -1,0 +1,150 @@
+.monthNav {
+  border: 1px solid grey;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.monthNav__currentMonth {
+  font-weight: bold;
+  /* border: 1px solid blue; */
+  padding: 0 2%;
+  border-radius: 4px;
+  flex-basis: 100%;
+  text-align: center;
+}
+.monthNav__currentMonth span {
+  margin: 0 0.2em;
+}
+.monthNav__iconPrev {
+  /* border: 1px solid blue; */
+  padding: 0 2%;
+  border-radius: 4px;
+  flex-basis: 5%;
+  cursor: pointer;
+  text-align: center;
+}
+.monthNav__iconPrev:hover {
+  background-color: grey;
+  color: white;
+}
+.monthNav__iconNext {
+  /* border: 1px solid blue; */
+  padding: 0 2%;
+  border-radius: 4px;
+  flex-basis: 5%;
+  cursor: pointer;
+  text-align: center;
+}
+.monthNav__iconNext:hover {
+  background-color: grey;
+  color: white;
+}
+.days {
+  width: 100%;
+}
+.daysHeader {
+  list-style: none;
+  /* border: 1px solid; */
+  padding: 0;
+  /* display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row nowrap; */
+  margin-bottom: 0;
+  /* border-radius: 5px; */
+  /* border-bottom: none; */
+  /* border-bottom-right-radius: 0; */
+  /* border-bottom-left-radius: 0; */
+}
+.daysHeader th {
+  border: 1px solid black;
+  /* height: 2em; */
+  /* width: 2em; */
+  text-align: center;
+  /* border-bottom: none; */
+  /* border-right: 0; */
+  /* flex-basis: 14.168%;
+  flex-basis: 14%; */
+  /* min-width: 14%; */
+  background-color: dodgerblue;
+  color: white;
+  border-top: 2px solid black;
+  /* min-width: 2em;
+  width: 100%; */
+}
+
+.daysHeader th:nth-child(6) {
+  background-color: darkslategrey;
+}
+.daysHeader th:nth-child(7) {
+  background-color: darkslategrey;
+}
+.daysBody {
+  list-style: none;
+  /* border: 1px solid; */
+  padding: 0;
+  /* display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: row wrap; */
+  margin-top: 0;
+  padding-top: 0;
+  /* border-top: none;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0; */
+}
+.daysBody tr {
+  /* width: 100%; */
+  /* display: flex; */
+}
+.daysBody td {
+  border: 1px solid;
+  /* height: 2em;
+  min-width: 2em;
+  width: 100%; */
+  text-align: center;
+  /* border-right: 0; */
+  /* border-top: none; */
+  /* flex-basis: 14.168%; */
+  /* flex-basis: 14%; */
+  /* min-width: 14%; */
+  /* max-width: 14%;
+  width: 100%; */
+}
+.daysBody td.empty {
+  background-color: #9e9e9e;
+}
+
+.dayInMonth.today {
+  background-color: #262688;
+  color: white;
+  border-color: black;
+  font-weight: bold;
+}
+.dayInMonth.eventDay {
+  /* background-color: salmon; */
+  position: relative;
+}
+.dayInMonth.eventDay:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 1em 1em 0;
+  border-color: transparent #007bff transparent transparent;
+}
+.dayInMonth.selectedDay {
+  background-color: turquoise;
+}
+/* To keep table cells width fixed and consistant width */
+table {
+  table-layout: fixed;
+}
+table td {
+  overflow: hidden;
+}
