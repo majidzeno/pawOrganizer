@@ -8,7 +8,7 @@ const allMonthsArr = moment.months(),
   constantMonth = moment().month(),
   constantYear = moment().year();
 let monthDaysArr = [],
-  eventsArr = [];
+  eventsLog = {};
 
 class Calendar extends Component {
   state = {
@@ -28,27 +28,70 @@ class Calendar extends Component {
     let currentMonthIndex = moment().month();
     let currentYear = this.state.momentObj.year();
     this.daysOfThisMonth();
-    let eventsKeys = null;
-    if (this.props.userEvents) {
+
+    return this.setState({
+      currentMonth: currentMonth,
+      currentMonthIndex: currentMonthIndex,
+      currentYear: currentYear
+    });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    let eventsKeys = null,
+      eventsArr = null;
+    if (this.props.userEvents !== prevProps.userEvents) {
       eventsKeys = Object.keys(this.props.userEvents);
-      eventsKeys.map(key =>
-        eventsArr.push([
-          this.props.userEvents[key].from,
-          this.props.userEvents[key].days
-        ])
-      );
-      console.log("eventsKeys =" + eventsKeys);
+      //   eventsKeys.map(key =>
+      //     eventsArr.push([
+      //       this.props.userEvents[key].from,
+      //       this.props.userEvents[key].to
+      //     ])
+      //   );
+      eventsArr = Object.values(this.props.userEvents);
+      // eventsLog
+      //Create a Month Key into eventsLog
+      // let eventMonthStart = null;
+      eventsArr.map(eventObj => {
+        let eventMonthStart = Number(eventObj.from.split("-")[1]),
+          eventMonthEnd = Number(eventObj.to.split("-")[1]),
+          eventDayStart = Number(eventObj.from.split("-")[2]),
+          eventDayEnd = Number(eventObj.to.split("-")[2]),
+          eventSpanOfInOneMonth = eventDayEnd - eventDayStart;
+        eventsLog[eventMonthStart] = [];
+        console.log(eventMonthStart);
+        if (eventMonthStart === eventMonthEnd) {
+          // In case event start and end in the same month
+          for (let i = 0; i <= eventSpanOfInOneMonth; i++) {
+            eventsLog[eventMonthStart].push(eventDayStart + i);
+          }
+        } else {
+          // Search for 'eventMonthStart' if you find it and concat to it get the length of this month and subtract the reminder days to the length of month days
+          // search fro 'eventMonthEnd' if you found it concat to it if not create a new one and subtract the days from the end date to the first day of the month
+        }
+      });
+      console.log(eventsLog);
+
+      // console.log("eventsArr =" + Object.keys(eventsArr[0]));
+      // let from1 = eventsArr[0][0].split('-');
+      // let from1Year = from1[0];
+      // let from1Month = from1[1];
+      // let from1Day = from1[2];
+      // console.log(from1Day);
+      // eventsArr.map(eventArr=>eventArr.map(
+
+      // ))
+      // matchDate = () =>{
+
+      // }
+
+      // for (let i = 0; i < eventsArr.length; i++) {
+
+      // }
       // this.setState({
       //   ...this.state,
       //   eventsArray: eventsArr
       // });
       // console.log("ev =" + eventsArr);
     }
-    return this.setState({
-      currentMonth: currentMonth,
-      currentMonthIndex: currentMonthIndex,
-      currentYear: currentYear
-    });
   }
 
   componentWillUpdate(prevProps, prevState) {
@@ -123,10 +166,18 @@ class Calendar extends Component {
     // console.log("this.state.momentObj = " + this.state.momentObj.month());
     // Push Normal Days and Today
     // eventsArr.map(d => console.log("d is " + d));
-    // console.log(eventsArr);
-
+    let eventsMonths = Object.keys(eventsLog);
+    console.log(
+      "eventsMonths.indexOf(this.state.momentObj.month()) = " +
+        eventsMonths.indexOf(this.state.momentObj.month())
+    );
+    // eventsLog
     for (let i = 1; i <= numberOfDaysInThisMonth; i++) {
-      if (
+      if (eventsMonths.indexOf(this.state.momentObj.month()) > 0) {
+        if (eventsLog[this.state.momentObj.month()].indexOf(i) > 0) {
+          monthDaysArr.push(this.dayGenerator("dayInMonth eventDay", i));
+        }
+      } else if (
         i === this.state.today &&
         constantMonth === this.state.momentObj.month() &&
         constantYear === this.state.momentObj.year()
@@ -177,6 +228,9 @@ class Calendar extends Component {
   // };
   render() {
     const weekdayShortNames = moment.weekdaysShort();
+    if (this.state.userEvents) {
+      this.daysOfThisMonth();
+    }
 
     return (
       <div>
