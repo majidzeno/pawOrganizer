@@ -3,15 +3,7 @@ import { connect } from "react-redux";
 import * as actionCreators from "../../Store/Actions/ActionCreators/index";
 import Button, { Success, Watchout } from "../../Components/UI/Button/Button";
 import DatePicker from "../../Components/UI/DatePick/DatePick";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-// library.add(faExclamationTriangle);
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faExclamationTriangle,
-  faStroopwafel
-} from "@fortawesome/free-solid-svg-icons";
 
 class HolidayRequest extends Component {
   state = {
@@ -174,8 +166,8 @@ class HolidayRequest extends Component {
 
 const mapStateToProps = state => {
   return {
-    noOfholidaysAv: state.holidays,
-    noOfholidaysTaken: state.taken
+    noOfholidaysAv: state.eventsReducer.holidays,
+    noOfholidaysTaken: state.eventsReducer.taken
   };
 };
 const mapDispatchToProps = dispatch => {

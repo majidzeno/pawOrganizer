@@ -7,8 +7,8 @@ import * as actionCreators from "../../Store/Actions/ActionCreators/index";
 const allMonthsArr = moment.months(),
   constantMonth = moment().month(),
   constantYear = moment().year();
-let monthDaysArr = [],
-  eventsLog = {};
+let monthDaysArr = [];
+var eventsLogOfThisYear = {};
 
 class Calendar extends Component {
   state = {
@@ -19,16 +19,15 @@ class Calendar extends Component {
     numberofdaysofthismonth: null,
     momentObj: moment(),
     today: moment().date(),
-    eventsArray: []
+    eventsArray: [],
+    showEvents: false
   };
 
   componentDidMount() {
     this.props.loadEvents();
-    let currentMonth = allMonthsArr[moment().month()];
-    let currentMonthIndex = moment().month();
-    let currentYear = this.state.momentObj.year();
-    this.daysOfThisMonth();
-
+    let currentMonth = allMonthsArr[moment().month()],
+      currentMonthIndex = moment().month(),
+      currentYear = this.state.momentObj.year();
     return this.setState({
       currentMonth: currentMonth,
       currentMonthIndex: currentMonthIndex,
@@ -38,64 +37,59 @@ class Calendar extends Component {
   componentDidUpdate(prevProps, prevState) {
     let eventsKeys = null,
       eventsArr = null;
+
     if (this.props.userEvents !== prevProps.userEvents) {
       eventsKeys = Object.keys(this.props.userEvents);
-      //   eventsKeys.map(key =>
-      //     eventsArr.push([
-      //       this.props.userEvents[key].from,
-      //       this.props.userEvents[key].to
-      //     ])
-      //   );
       eventsArr = Object.values(this.props.userEvents);
-      // eventsLog
-      //Create a Month Key into eventsLog
-      // let eventMonthStart = null;
       eventsArr.map(eventObj => {
-        let eventMonthStart = Number(eventObj.from.split("-")[1]),
-          eventMonthEnd = Number(eventObj.to.split("-")[1]),
+        let eventMonthStart = Number(eventObj.from.split("-")[1]) - 1,
+          eventMonthEnd = Number(eventObj.to.split("-")[1]) - 1,
           eventDayStart = Number(eventObj.from.split("-")[2]),
           eventDayEnd = Number(eventObj.to.split("-")[2]),
           eventSpanOfInOneMonth = eventDayEnd - eventDayStart;
-        eventsLog[eventMonthStart] = [];
-        console.log(eventMonthStart);
+        console.log("eventsLogOfThisYear", eventsLogOfThisYear);
         if (eventMonthStart === eventMonthEnd) {
+          if (!eventsLogOfThisYear[eventMonthEnd]) {
+            eventsLogOfThisYear[eventMonthEnd] = [];
+          }
+          eventsLogOfThisYear[eventMonthStart] = []; // Empty the array of days of this month
           // In case event start and end in the same month
           for (let i = 0; i <= eventSpanOfInOneMonth; i++) {
-            eventsLog[eventMonthStart].push(eventDayStart + i);
+            eventsLogOfThisYear[eventMonthStart].push(eventDayStart + i);
           }
         } else {
-          // Search for 'eventMonthStart' if you find it and concat to it get the length of this month and subtract the reminder days to the length of month days
-          // search fro 'eventMonthEnd' if you found it concat to it if not create a new one and subtract the days from the end date to the first day of the month
+          if (!eventsLogOfThisYear[eventMonthStart]) {
+            eventsLogOfThisYear[eventMonthStart] = [];
+          }
+          if (!eventsLogOfThisYear[eventMonthEnd]) {
+            eventsLogOfThisYear[eventMonthEnd] = [];
+          }
+          let monthEndDay = moment(
+              "2019-" + (eventMonthStart + 1)
+            ).daysInMonth(),
+            firstMonthSpan = monthEndDay - eventDayStart,
+            secondMonthSpan = eventDayEnd - 1;
+          for (let i = 0; i <= firstMonthSpan; i++) {
+            eventsLogOfThisYear[eventMonthStart].push(eventDayStart + i);
+          }
+          for (let i = 0; i <= secondMonthSpan; i++) {
+            eventsLogOfThisYear[eventMonthEnd].push(i + 1);
+          }
         }
       });
-      console.log(eventsLog);
-
-      // console.log("eventsArr =" + Object.keys(eventsArr[0]));
-      // let from1 = eventsArr[0][0].split('-');
-      // let from1Year = from1[0];
-      // let from1Month = from1[1];
-      // let from1Day = from1[2];
-      // console.log(from1Day);
-      // eventsArr.map(eventArr=>eventArr.map(
-
-      // ))
-      // matchDate = () =>{
-
-      // }
-
-      // for (let i = 0; i < eventsArr.length; i++) {
-
-      // }
-      // this.setState({
-      //   ...this.state,
-      //   eventsArray: eventsArr
-      // });
-      // console.log("ev =" + eventsArr);
+      this.setState({
+        ...this.state,
+        showEvents: !this.state.showEvents
+      });
     }
+    this.daysOfThisMonth();
   }
 
   componentWillUpdate(prevProps, prevState) {
-    return this.daysOfThisMonth();
+    // return this.daysOfThisMonth();
+    if (this.props.userEvents !== prevProps.userEvents) {
+      this.daysOfThisMonth();
+    }
   }
 
   daysInMonth = () => {
@@ -117,7 +111,6 @@ class Calendar extends Component {
   month = () => {
     return this.state.momentObj.format("MMMM"); // June
   };
-
   nextMonth = () => {
     // Need Conditionals
     let currentMonthIndex = this.state.currentMonthIndex + 1;
@@ -133,7 +126,6 @@ class Calendar extends Component {
       currentYear: this.year()
     });
   };
-
   prevMonth = () => {
     let currentMonthIndex = this.state.currentMonthIndex - 1;
     if (currentMonthIndex < 0) {
@@ -147,7 +139,6 @@ class Calendar extends Component {
       currentYear: this.year()
     });
   };
-  // eventsArr = [{}] // events fetched from server
   dayGenerator = (newClasses, i) => {
     return (
       <td className={newClasses} key={i}>
@@ -160,23 +151,25 @@ class Calendar extends Component {
     let numberOfDaysInThisMonth = this.daysInMonth(),
       blankCells = [];
     monthDaysArr = [];
-    // console.log(
-    //   "this.state.currentMonthIndex = " + this.state.currentMonthIndex
-    // );
-    // console.log("this.state.momentObj = " + this.state.momentObj.month());
     // Push Normal Days and Today
-    // eventsArr.map(d => console.log("d is " + d));
-    let eventsMonths = Object.keys(eventsLog);
-    console.log(
-      "eventsMonths.indexOf(this.state.momentObj.month()) = " +
-        eventsMonths.indexOf(this.state.momentObj.month())
-    );
-    // eventsLog
+    var eventsMonths = Object.keys(eventsLogOfThisYear);
+    // eventsLogOfThisYear
+
     for (let i = 1; i <= numberOfDaysInThisMonth; i++) {
-      if (eventsMonths.indexOf(this.state.momentObj.month()) > 0) {
-        if (eventsLog[this.state.momentObj.month()].indexOf(i) > 0) {
-          monthDaysArr.push(this.dayGenerator("dayInMonth eventDay", i));
-        }
+      if (
+        constantYear === this.state.momentObj.year() &&
+        eventsMonths.indexOf(this.state.momentObj.month() + "") > -1 &&
+        eventsLogOfThisYear[this.state.momentObj.month()].indexOf(i) > -1 &&
+        constantMonth === this.state.momentObj.month() &&
+        i === this.state.today
+      ) {
+        monthDaysArr.push(this.dayGenerator("dayInMonth eventDay today", i));
+      } else if (
+        constantYear === this.state.momentObj.year() &&
+        eventsMonths.indexOf(this.state.momentObj.month() + "") > -1 &&
+        eventsLogOfThisYear[this.state.momentObj.month()].indexOf(i) > -1
+      ) {
+        monthDaysArr.push(this.dayGenerator("dayInMonth eventDay", i));
       } else if (
         i === this.state.today &&
         constantMonth === this.state.momentObj.month() &&
@@ -223,15 +216,9 @@ class Calendar extends Component {
     });
   };
 
-  // uselessfunction//cal = () => {
-  //   return moment().calendar();
-  // };
   render() {
     const weekdayShortNames = moment.weekdaysShort();
-    if (this.state.userEvents) {
-      this.daysOfThisMonth();
-    }
-
+    this.daysOfThisMonth();
     return (
       <div>
         <div className="monthNav">
@@ -254,7 +241,15 @@ class Calendar extends Component {
               })}
             </tr>
           </thead>
-          <tbody className="daysBody">{this.renderDays()}</tbody>
+          <tbody className="daysBody">
+            {this.props.userEvents ? (
+              this.renderDays()
+            ) : (
+              <tr>
+                <td>Loading...</td>
+              </tr>
+            )}
+          </tbody>
         </table>
       </div>
     );

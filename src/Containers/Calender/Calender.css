@@ -126,6 +126,7 @@
 .dayInMonth.eventDay {
   /* background-color: salmon; */
   position: relative;
+  /* background-color: #007bff; */
 }
 .dayInMonth.eventDay:after {
   content: "";
