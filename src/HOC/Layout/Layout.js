@@ -10,7 +10,6 @@ class Layout extends Component {
       <div className={layoutStyle}>
         <SideDrawer />
         <div style={{ width: "100%", padding: "2em" }}>
-          <h1></h1>
           {this.props.children}
         </div>
       </div>
