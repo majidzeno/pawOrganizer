@@ -251,6 +251,7 @@ class Calendar extends Component {
             )}
           </tbody>
         </table>
+        
       </div>
     );
   }
