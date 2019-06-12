@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/pawOrganizer/static/css/main.7f6c942a.chunk.css",
+    "main.js": "/pawOrganizer/static/js/main.05321412.chunk.js",
+    "main.js.map": "/pawOrganizer/static/js/main.05321412.chunk.js.map",
+    "runtime~main.js": "/pawOrganizer/static/js/runtime~main.0baaf028.js",
+    "runtime~main.js.map": "/pawOrganizer/static/js/runtime~main.0baaf028.js.map",
+    "static/css/2.6d2c8d95.chunk.css": "/pawOrganizer/static/css/2.6d2c8d95.chunk.css",
+    "static/js/2.98406a38.chunk.js": "/pawOrganizer/static/js/2.98406a38.chunk.js",
+    "static/js/2.98406a38.chunk.js.map": "/pawOrganizer/static/js/2.98406a38.chunk.js.map",
+    "index.html": "/pawOrganizer/index.html",
+    "precache-manifest.c81fd00644ac73ca442fbf84b52196d5.js": "/pawOrganizer/precache-manifest.c81fd00644ac73ca442fbf84b52196d5.js",
+    "service-worker.js": "/pawOrganizer/service-worker.js",
+    "static/css/2.6d2c8d95.chunk.css.map": "/pawOrganizer/static/css/2.6d2c8d95.chunk.css.map",
+    "static/css/main.7f6c942a.chunk.css.map": "/pawOrganizer/static/css/main.7f6c942a.chunk.css.map",
+    "static/media/index.css": "/pawOrganizer/static/media/Cairo-SemiBold.6e318a70.ttf",
+    "static/media/logo.svg": "/pawOrganizer/static/media/logo.65578855.svg"
+  }
+}
