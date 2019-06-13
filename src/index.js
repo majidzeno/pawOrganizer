@@ -13,13 +13,16 @@ const composeEnhancers =
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : null || compose;
 
-    const rootReducer = combineReducers({
-      eventsReducer : eventsReducer
-    })
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const rootReducer = combineReducers({
+  eventsReducer: eventsReducer
+});
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <App />
     </BrowserRouter>
   </Provider>,

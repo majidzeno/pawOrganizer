@@ -9,13 +9,18 @@ import Calender from "./Containers/Calender/Calender";
 import Profile from "./Containers/Profile/Profile";
 import HolidayRequest from "./Containers/Requests/HolidayRequest";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faExclamationTriangle,faArrowLeft,faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import 'react-dates/lib/css/_datepicker.css';
+import {
+  faExclamationTriangle,
+  faArrowLeft,
+  faArrowRight
+} from "@fortawesome/free-solid-svg-icons";
+import "react-dates/lib/css/_datepicker.css";
 
-library.add(faExclamationTriangle,faArrowLeft,faArrowRight);
+library.add(faExclamationTriangle, faArrowLeft, faArrowRight);
 
 class App extends Component {
   render() {
+    console.log(this.props);
     const routes = (
       <Switch>
         <Route exact path="/" component={Dashboard} />
