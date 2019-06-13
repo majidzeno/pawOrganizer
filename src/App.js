@@ -20,13 +20,22 @@ library.add(faExclamationTriangle, faArrowLeft, faArrowRight);
 
 class App extends Component {
   render() {
-    console.log(this.props);
     const routes = (
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/calender" component={Calender} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/requestaholiday" component={HolidayRequest} />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + "/"}
+          component={Dashboard}
+        />
+        <Route
+          path={process.env.PUBLIC_URL + "/calender"}
+          component={Calender}
+        />
+        <Route path={process.env.PUBLIC_URL + "/profile"} component={Profile} />
+        <Route
+          path={process.env.PUBLIC_URL + "/requestaholiday"}
+          component={HolidayRequest}
+        />
       </Switch>
     );
     return (
