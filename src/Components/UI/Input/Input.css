@@ -1,0 +1,37 @@
+.inputComp {
+  /* border: 2px solid; */
+  display: flex;
+  align-items: center;
+  /* max-width: 50%; */
+  width: 100%;
+  margin: 1%;
+}
+.inputCompLabel {
+  /* border: 2px solid red; */
+  flex-basis: 20%;
+  text-align: left;
+}
+.inputCompCell {
+  border: none;
+  border: 1px solid grey;
+  flex-basis: 40%;
+  font-size: 1rem;
+  padding: 2%;
+}
+.invalid {
+  /* border: 2px solid red; */
+  background-color: #eca7a7;
+}
+.inputCompErrorMessage {
+  flex-basis: 40%;
+  padding-left: 5%;
+  /* border: 2px solid red; */
+  margin: 0 1%;
+  background-color: #eca7a7;
+}
+.link {
+  margin-left: 1%;
+  text-decoration: underline;
+  color: dodgerblue;
+  cursor: pointer;
+}

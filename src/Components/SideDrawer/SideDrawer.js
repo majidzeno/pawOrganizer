@@ -6,7 +6,7 @@ import Logo from "../../Assets/Icons/logo.png";
 const SideDrawerStyle = css`
     background-color: #262688;
     color: white;
-    height: 100vh;
+    height: 84vh;
     margin: 0;
     padding: 2em;
   `,
@@ -22,12 +22,12 @@ const SideDrawerStyle = css`
     background-color: #262688;
   `;
 
-const SideDrawer = () => {
+const SideDrawer = (props) => {
   return (
     <div className={containerStyle}>
       <img className={svgStyle} src={Logo} alt="logo" />
       <ul className={SideDrawerStyle}>
-        <NavigationItems />
+        <NavigationItems isLoggedIn={props.isLoggedIn} />
       </ul>
     </div>
   );

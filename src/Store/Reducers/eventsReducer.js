@@ -20,8 +20,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         events: action.events
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default reducer;
