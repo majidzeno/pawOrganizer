@@ -26,7 +26,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path={process.env.PUBLIC_URL + "/auth"} component={Auth} />
-        <Redirect to="/auth" />
+        <Redirect to={process.env.PUBLIC_URL + "/auth"} />
       </Switch>
     );
     if (this.props.isLoggedIn) {
