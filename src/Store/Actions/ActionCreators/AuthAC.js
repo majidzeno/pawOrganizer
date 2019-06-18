@@ -18,8 +18,12 @@ export const auth = (email, password, alreadyMember) => {
         returnSecureToken: true
       },
       URL = alreadyMember
-        ? "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyD3z-j25JxBlHexjneXPPZagU4oRwe06uE"
-        : "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyD3z-j25JxBlHexjneXPPZagU4oRwe06uE";
+        ? `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${
+            process.env.REACT_APP_FIREBASE_API
+          }`
+        : `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${
+            process.env.REACT_APP_FIREBASE_API
+          }`;
     axios
       .post(URL, authData)
       .then(response => {

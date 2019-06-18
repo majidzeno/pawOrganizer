@@ -40,7 +40,7 @@ const Slice = props => {
   let interpolate = d3.interpolateRgb("#eeaf79", "#bc3358");
   return pie.map((slice, index) => {
     let sliceColor = interpolate(index / (pie.length - 1));
-    return <path d={arc(slice)} fill={sliceColor} />;
+    return <path key={index*.3} d={arc(slice)} fill={sliceColor} />;
   });
 };
 const mapStateToProps = state => {
