@@ -9,7 +9,7 @@ class Logout extends Component {
   render() {
     return (
       <div>
-        <Redirect to="/auth" />
+        <Redirect to={process.env.PUBLIC_URL + "/auth"} />
       </div>
     );
   }

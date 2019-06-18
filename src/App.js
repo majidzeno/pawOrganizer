@@ -50,7 +50,7 @@ class App extends Component {
             path={process.env.PUBLIC_URL + "/requestaholiday"}
             component={HolidayRequest}
           />
-          <Redirect to="/" />
+          <Redirect to={process.env.PUBLIC_URL + "/"} />
         </Switch>
       );
     }
