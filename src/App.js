@@ -23,11 +23,7 @@ library.add(faExclamationTriangle, faArrowLeft, faArrowRight);
 
 class App extends Component {
   render() {
-<<<<<<< HEAD
     let routes = (
-=======
-    const routes = (
->>>>>>> parent of 4b10da4... Fix Router Url
       <Switch>
         <Route path={process.env.PUBLIC_URL + "/auth"} component={Auth} />
         <Redirect to="/auth" />

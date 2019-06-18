@@ -47,7 +47,7 @@ class Calendar extends Component {
           eventDayStart = Number(eventObj.from.split("-")[2]),
           eventDayEnd = Number(eventObj.to.split("-")[2]),
           eventSpanOfInOneMonth = eventDayEnd - eventDayStart;
-        console.log("eventsLogOfThisYear", eventsLogOfThisYear);
+        // console.log("eventsLogOfThisYear", eventsLogOfThisYear);
         if (eventMonthStart === eventMonthEnd) {
           if (!eventsLogOfThisYear[eventMonthEnd]) {
             eventsLogOfThisYear[eventMonthEnd] = [];
@@ -86,7 +86,6 @@ class Calendar extends Component {
   }
 
   componentWillUpdate(prevProps, prevState) {
-    // return this.daysOfThisMonth();
     if (this.props.userEvents !== prevProps.userEvents) {
       this.daysOfThisMonth();
     }
